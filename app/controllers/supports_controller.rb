@@ -1,13 +1,12 @@
 class SupportsController < ApplicationController
-  before_action :find_support, only: [:show, :destroy, :edit, :update]
+  before_action :find_support, only: [:show, :destroy, :edit, :update, :progress_change]
 
   Suppport_Per_Page = 7
 
   def index
     @supports = Support.order(created_at: :desc)
-                .page(params[:page])
-                .per(Suppport_Per_Page)
-                
+                       .page(params[:page])
+                       .per(Suppport_Per_Page)
   end
 
   def show
@@ -21,7 +20,7 @@ class SupportsController < ApplicationController
   end
 
   def create
-    @support =Support.new support_params
+    @support = Support.new support_params
     if @support.save
       redirect_to supports_path
     else
@@ -37,6 +36,19 @@ class SupportsController < ApplicationController
     end
   end
 
+  def progress_change
+    # render json: params
+    if @support.job_done
+      @support.job_done = false
+      @support.save
+      redirect_to supports_path
+    else
+      @support.job_done = true
+      @support.save
+      redirect_to supports_path
+    end
+  end
+
   def destroy
     @support.destroy
     redirect_to root_path
@@ -49,6 +61,6 @@ class SupportsController < ApplicationController
   end
 
   def support_params
-    params.require(:support).permit([:name, :email, :department, :message])
+    params.require(:support).permit([:name, :email, :department, :message, :job_done])
   end
 end

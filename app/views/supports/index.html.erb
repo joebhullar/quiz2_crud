@@ -21,7 +21,11 @@
       <%= link_to "Delete", support_path(s), method: :delete %>
     </td>
     <td>
-      <%= s.job_done ? "Done" : "Not Done" %>
+      <% if s.job_done %>
+        <%= link_to "Done", progress_change_path(s) %>
+      <% else %>
+        <%= link_to "Not Done",progress_change_path(s) %>
+      <% end %>
     </td>
   </tr>
   <% end %>

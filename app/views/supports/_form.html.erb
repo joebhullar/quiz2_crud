@@ -8,6 +8,11 @@
 <%= f.radio_button :department, 'Technical', label: "Technical" %>
 <% end %>
 
+<%= f.form_group :job_done, label: { text: "Progress" } do %>
+<%= f.radio_button :job_done, false, label: "Not Done"%>
+<%= f.radio_button :job_done, true, label: "Done" %>
+<% end %>
+
 <%= f.text_area :message %>
 <%= f.submit "Submit" %>
 <% end %>
