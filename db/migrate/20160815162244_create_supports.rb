@@ -1,6 +1,7 @@
-class CreateNames < ActiveRecord::Migration[5.0]
+class CreateSupports < ActiveRecord::Migration[5.0]
   def change
-    create_table :names do |t|
+    create_table :supports do |t|
+      t.string :name
       t.string :email
       t.string :department
       t.text :message

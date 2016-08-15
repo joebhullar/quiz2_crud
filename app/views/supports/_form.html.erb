@@ -1,0 +1,13 @@
+<%= bootstrap_form_for @support do |f| %>
+<%= f.text_field :name %>
+<%= f.email_field :email %>
+
+<%= f.form_group :department, label: { text: "Skill" }, help: "Optional Help Text" do %>
+<%= f.radio_button :department, 'Sales', label: "Sales"%>
+<%= f.radio_button :department, 'Marketing', label: "Marketing" %>
+<%= f.radio_button :department, 'Technical', label: "Technical" %>
+<% end %>
+
+<%= f.text_area :message %>
+<%= f.submit "Submit" %>
+<% end %>
