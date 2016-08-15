@@ -7,6 +7,7 @@
     <th>Deparment</th>
     <th>Message</th>
     <th>Actions</th>
+    <th>Progress</th>
   </tr>
 
   <% @supports.each do |s| %>
@@ -18,8 +19,12 @@
     <td>
       <%= link_to "Edit", edit_support_path(s) %>
       <%= link_to "Delete", support_path(s), method: :delete %>
-      <%= link_to "Done" %>
+    </td>
+    <td>
+      <%= s.job_done ? "Done" : "Not Done" %>
     </td>
   </tr>
   <% end %>
 </table>
+
+<%= paginate @supports %>

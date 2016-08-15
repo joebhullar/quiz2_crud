@@ -1,8 +1,13 @@
 class SupportsController < ApplicationController
   before_action :find_support, only: [:show, :destroy, :edit, :update]
 
+  Suppport_Per_Page = 7
+
   def index
     @supports = Support.order(created_at: :desc)
+                .page(params[:page])
+                .per(Suppport_Per_Page)
+                
   end
 
   def show
@@ -10,6 +15,20 @@ class SupportsController < ApplicationController
 
   def edit
   end
+
+  def new
+    @support = Support.new
+  end
+
+  def create
+    @support =Support.new support_params
+    if @support.save
+      redirect_to supports_path
+    else
+      render :new
+    end
+  end
+
   def update
     if @support.update support_params
       redirect_to supports_path
