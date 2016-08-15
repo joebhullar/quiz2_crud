@@ -38,14 +38,14 @@ class SupportsController < ApplicationController
 
   def progress_change
     # render json: params
-    if @support.job_done
+    if @support.job_done == true
       @support.job_done = false
       @support.save
-      redirect_to supports_path
+      redirect_to :back
     else
       @support.job_done = true
       @support.save
-      redirect_to supports_path
+      redirect_to :back
     end
   end
 
