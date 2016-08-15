@@ -9,6 +9,13 @@ class SupportsController < ApplicationController
                        .per(Suppport_Per_Page)
   end
 
+  def search
+    @supports2 = Support.search(params[:keyword])
+    @supports = @supports2.order(created_at: :desc)
+                          .page(params[:page])
+                          .per(5)
+  end
+
   def show
   end
 

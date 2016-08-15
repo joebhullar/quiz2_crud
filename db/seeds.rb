@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-HOW_MANY = 10
+HOW_MANY = 1000
 
 def random_department
   array = %w(Sales Marketing Technical)
