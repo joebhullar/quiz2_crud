@@ -10,8 +10,8 @@ class SupportsController < ApplicationController
   end
 
   def search
-    @supports2 = Support.search(params[:keyword])
-    @supports = @supports2.order(created_at: :desc)
+    searched = Support.search(params[:keyword])
+    @supports = searched.order(created_at: :desc)
                           .page(params[:page])
                           .per(5)
   end
@@ -47,13 +47,11 @@ class SupportsController < ApplicationController
     # render json: params
     if @support.job_done == true
       @support.job_done = false
-      @support.save
-      redirect_to :back
     else
       @support.job_done = true
-      @support.save
-      redirect_to :back
     end
+    @support.save
+    redirect_to :back
   end
 
   def destroy
